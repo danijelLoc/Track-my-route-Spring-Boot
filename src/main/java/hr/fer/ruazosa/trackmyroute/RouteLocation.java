@@ -21,11 +21,11 @@ public class RouteLocation
 
     @Column(name = "latitude")
     @NotNull(message = "latitude cannot be null")
-    private Float latitude;
+    private Double latitude;
 
     @Column(name = "longitude")
     @NotNull(message = "longitude cannot be null")
-    private Float longitude;
+    private Double longitude;
 
     @Column(name = "moment")
     @NotNull(message = "moment cannot be null")
@@ -45,19 +45,19 @@ public class RouteLocation
         this.route = route;
     }
 
-    public Float getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Float latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Float getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Float longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
