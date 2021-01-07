@@ -37,8 +37,13 @@ public class RouteService implements IRouteService {
 
     @Override
     public Route saveRoute(Route route, Long user_id) {
-        List<Route> routeList = routeRepository.findAllByUserId(user_id);
-        routeList.add(route);
+        routeRepository.save(route);
+        return route;
+    }
+
+    @Override
+    public Route deleteRoute(Route route, Long user_id) {
+        routeRepository.delete(route);
         return route;
     }
 }

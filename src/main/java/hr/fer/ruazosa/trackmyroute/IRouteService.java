@@ -6,4 +6,5 @@ public interface IRouteService {
 
     List<Route> getRouteList(Long user_id);
     Route saveRoute(Route route, Long user_id);
+    Route deleteRoute(Route route, Long user_id);
 }
