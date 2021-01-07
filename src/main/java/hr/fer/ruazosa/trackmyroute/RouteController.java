@@ -52,7 +52,41 @@ public class RouteController {
         route.setUser(user);
         routeService.saveRoute(route);
         return new ResponseEntity<Object>(route, HttpStatus.OK);
+    }
 
+    @PostMapping("/deleteRoute")
+    public ResponseEntity<Object> deleteRoute(@RequestBody Route route) {
+        // validation
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Route>> violations = validator.validate(route);
 
+        Map<String, Object> body = new LinkedHashMap<>();
+        for (ConstraintViolation<Route> violation : violations) {
+            body.put(violation.getPropertyPath().toString(), violation.getMessage());
+        }
+        if (!body.isEmpty()) {
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
+        }
+        List<Route> routeList = routeService.getRouteList(route.getUser().getId());
+        if (routeList == null) {
+            body.put("error", "Route doesn't exist, list empty");
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
+        }
+        if (!(routeList.contains(route))) {
+            body.put("error", "Route doesn't exist");
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
+        }
+
+        User user = routeService.loginUser(route.getUser());
+        body.put("user", user);
+
+        if(user == null) {
+            body.put("error", "Invalid username or password");
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
+        }
+        route.setUser(user);
+        routeService.deleteRoute(route);
+        return new ResponseEntity<Object>(route, HttpStatus.OK);
     }
 }

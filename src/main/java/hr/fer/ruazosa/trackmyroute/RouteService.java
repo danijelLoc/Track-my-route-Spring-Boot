@@ -34,13 +34,18 @@ public class RouteService implements IRouteService {
         if (routeList.isEmpty()) {
             return null;
         }
-
         return routeRepository.findAllByUserId(user_id);
     }
 
     @Override
     public Route saveRoute(Route route) {
         return routeRepository.save(route);
+    }
+
+    @Override
+    public Route deleteRoute(Route route) {
+        routeRepository.delete(route);
+        return route;
     }
 
 }
