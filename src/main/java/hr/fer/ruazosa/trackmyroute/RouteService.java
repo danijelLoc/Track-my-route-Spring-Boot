@@ -15,17 +15,17 @@ public class RouteService implements IRouteService {
 
 
     @Override
-    public List<RouteBasic> getRouteList(Long user_id) {
-        List<RouteBasic> routeList = routeRepository.findRouteBasicByUserId(user_id);
+    public List<Route> getRouteList(Long user_id) {
+        List<Route> routeList = routeRepository.findAllByUserId(user_id);
         if (routeList.isEmpty()) {
             return null;
         }
-        return routeRepository.findRouteBasicByUserId(user_id);
+        return routeRepository.findAllByUserId(user_id);
     }
 
     @Override
     public Route saveRoute(Route route, Long user_id) {
-        List<Route> routeList = routeRepository.findRouteByUserId(user_id);
+        List<Route> routeList = routeRepository.findAllByUserId(user_id);
         routeList.add(route);
         return route;
     }
