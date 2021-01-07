@@ -2,6 +2,7 @@ package hr.fer.ruazosa.trackmyroute;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.*;
 
 
@@ -20,7 +21,7 @@ public class Route {
     @NotBlank(message = "Name cannot be emtpy")
     @Column(name = "name")
     private String name;
-    @NotBlank(message = "Date cannot be emtpy")
+    @NotNull(message = "Date cannot be emtpy")
     @Column(name = "date")
     private Date date;
     @Column(name = "duration")
@@ -39,7 +40,9 @@ public class Route {
         this.id = id;
     }
 
-    public User getUserId() { return user;}
+    public User getUser() { return user;}
+
+    public void setUser(User user) { this.user = user;}
 
     public String getName() {
         return name;
