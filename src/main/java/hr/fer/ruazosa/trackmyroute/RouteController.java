@@ -41,9 +41,7 @@ public class RouteController {
         if (!body.isEmpty()) {
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
         }
-        //UserBasic userBasic = new UserBasic(route.getUser().getUsername(), route.getUser().getPassword());
-        //UserBasic userBasic = new UserBasic("Pero", "1234");
-        //UserService userService = new UserService();
+
         User user = routeService.loginUser(route.getUser());
         body.put("user", user);
 
@@ -55,26 +53,6 @@ public class RouteController {
         routeService.saveRoute(route);
         return new ResponseEntity<Object>(route, HttpStatus.OK);
 
-        /*//validation
-        if (route == null) {
-            Map<String,Object> body = new LinkedHashMap<>();
-            body.put("error", "no route JSON object in body");
-            return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
-        } else if (route.getName().isEmpty()) {
-            Map<String, Object> body = new LinkedHashMap<>();
-            body.put("error", "route name is empty");
-            return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
-        }
-        /* else if (route.getUser().getId() != user_id) {
-            Map<String, Object> body = new LinkedHashMap<>();
-            body.put("error", "this route is not from this user");
-            return new ResponseEntity<Object>(body, HttpStatus.CONFLICT);
-        }  else {
-            Map<String, Object> body = new LinkedHashMap<>();
-            routeService.saveRoute(route, user_id);
-            body.put("user", route);
-            return new ResponseEntity<Object>(body, HttpStatus.OK);
-        }*/
 
     }
 }
