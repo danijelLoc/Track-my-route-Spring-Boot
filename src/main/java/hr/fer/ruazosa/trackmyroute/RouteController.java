@@ -17,7 +17,7 @@ public class RouteController {
     // shape /routes?user_id=1
     @GetMapping("/routes")
     @ResponseBody
-    public List<RouteBasic> getRouteList(@RequestParam Long user_id) {
+    public List<Route> getRouteList(@RequestParam Long user_id) {
         return routeService.getRouteList(user_id);
     }
 

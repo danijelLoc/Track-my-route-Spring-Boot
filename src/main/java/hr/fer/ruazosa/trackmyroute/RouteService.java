@@ -16,13 +16,13 @@ public class RouteService implements IRouteService {
 
 
     @Override
-    public List<RouteBasic> getRouteList(Long user_id) {
+    public List<Route> getRouteList(Long user_id) {
         List<Route> routeList = routeRepository.findAllByUserId(user_id);
         if (routeList.isEmpty()) {
             return null;
         }
 
-        List<RouteBasic> routeBasicList = new ArrayList<>();
+        /*List<RouteBasic> routeBasicList = new ArrayList<>();
         for (Route r: routeList) {
             RouteBasic rb = new RouteBasic();
             rb.name = r.getName();
@@ -31,7 +31,8 @@ public class RouteService implements IRouteService {
             rb.user_id = r.getUserId();
             routeBasicList.add(rb);
         }
-        return routeBasicList;
+        return routeBasicList;*/
+        return routeRepository.findAllByUserId(user_id);
     }
 
     @Override
