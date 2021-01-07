@@ -39,6 +39,8 @@ public class Route {
         this.id = id;
     }
 
+    public User getUserId() { return user;}
+
     public String getName() {
         return name;
     }

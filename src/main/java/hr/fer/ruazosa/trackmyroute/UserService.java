@@ -41,4 +41,22 @@ public class UserService implements IUserService {
         }
         return userRepository.findByUserNameAndPassword(userBasic.username,userBasic.password).get(0);
     }
+
+    @Override
+    public List<RouteBasic> getRouteList(Long user_id) {
+        List<RouteBasic> routeList = userRepository.findRouteBasicByUserId(user_id);
+        if (routeList.isEmpty()) {
+            return null;
+        }
+        return userRepository.findRouteBasicByUserId(user_id);
+    }
+
+    @Override
+    public Route saveRoute(Route route, Long user_id) {
+        List<Route> routeList = userRepository.findRouteByUserId(user_id);
+        routeList.add(route);
+        return route;
+    }
+
+
 }

@@ -12,6 +12,7 @@ import javax.validation.ValidatorFactory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -75,4 +76,34 @@ public class UserController {
         }
 
     }
+
+    @GetMapping("/{id}/routes")
+    @ResponseBody
+    public List<RouteBasic> getRouteList(@RequestParam Long user_id) {
+        return userService.getRouteList(user_id);
+    }
+
+    @PostMapping("{id}/saveRoute")
+    public ResponseEntity<Object> saveRoute(@RequestBody Route route, @RequestParam Long user_id) {
+        //validation
+        if (route == null) {
+            Map<String,Object> body = new LinkedHashMap<>();
+            body.put("error", "no route JSON object in body");
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
+        } else if (route.getName().isEmpty()) {
+            Map<String, Object> body = new LinkedHashMap<>();
+            body.put("error", "route name is empty");
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
+        } else if (route.getUserId().getId() != user_id) {
+            Map<String, Object> body = new LinkedHashMap<>();
+            body.put("error", "this route is not from this user");
+            return new ResponseEntity<Object>(body, HttpStatus.CONFLICT);
+        } else {
+            Map<String, Object> body = new LinkedHashMap<>();
+            userService.saveRoute(route, user_id);
+            body.put("user", route);
+            return new ResponseEntity<Object>(body, HttpStatus.OK);
+        }
+    }
+
 }
