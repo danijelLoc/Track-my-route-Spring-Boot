@@ -17,11 +17,12 @@ public class RouteController {
     // shape /routes?user_id=1
     @GetMapping("/routes")
     @ResponseBody
-    public List<Route> getRouteList(@RequestParam Long user_id) {
+    public List<RouteBasic> getRouteList(@RequestParam Long user_id) {
         return routeService.getRouteList(user_id);
     }
 
-    @PostMapping("{id}/saveRoute")
+
+    @PostMapping("/saveRoute")
     public ResponseEntity<Object> saveRoute(@RequestBody Route route, @RequestParam Long user_id) {
         //validation
         if (route == null) {

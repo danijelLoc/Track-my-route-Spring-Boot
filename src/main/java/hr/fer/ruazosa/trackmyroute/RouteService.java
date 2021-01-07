@@ -1,5 +1,6 @@
 package hr.fer.ruazosa.trackmyroute;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,22 @@ public class RouteService implements IRouteService {
 
 
     @Override
-    public List<Route> getRouteList(Long user_id) {
+    public List<RouteBasic> getRouteList(Long user_id) {
         List<Route> routeList = routeRepository.findAllByUserId(user_id);
         if (routeList.isEmpty()) {
             return null;
         }
-        return routeRepository.findAllByUserId(user_id);
+
+        List<RouteBasic> routeBasicList = new ArrayList<>();
+        for (Route r: routeList) {
+            RouteBasic rb = new RouteBasic();
+            rb.name = r.getName();
+            rb.date = r.getDate();
+            rb.route_id = r.getId();
+            rb.user_id = r.getUserId();
+            routeBasicList.add(rb);
+        }
+        return routeBasicList;
     }
 
     @Override

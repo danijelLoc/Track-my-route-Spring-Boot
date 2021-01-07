@@ -4,6 +4,6 @@ import java.util.List;
 
 public interface IRouteService {
 
-    List<Route> getRouteList(Long user_id);
+    List<RouteBasic> getRouteList(Long user_id);
     Route saveRoute(Route route, Long user_id);
 }
