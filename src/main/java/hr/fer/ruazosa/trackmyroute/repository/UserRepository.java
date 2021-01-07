@@ -1,5 +1,6 @@
-package hr.fer.ruazosa.trackmyroute;
+package hr.fer.ruazosa.trackmyroute.repository;
 
+import hr.fer.ruazosa.trackmyroute.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

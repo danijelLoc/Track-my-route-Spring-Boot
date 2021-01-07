@@ -1,6 +1,7 @@
-package hr.fer.ruazosa.trackmyroute;
+package hr.fer.ruazosa.trackmyroute.service;
 
-import java.util.List;
+import hr.fer.ruazosa.trackmyroute.model.User;
+import hr.fer.ruazosa.trackmyroute.model.UserBasic;
 
 public interface IUserService {
     User registerUser(User user);

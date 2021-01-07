@@ -1,9 +1,12 @@
-package hr.fer.ruazosa.trackmyroute;
+package hr.fer.ruazosa.trackmyroute.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
+import hr.fer.ruazosa.trackmyroute.model.Route;
+import hr.fer.ruazosa.trackmyroute.model.User;
+import hr.fer.ruazosa.trackmyroute.repository.RouteRepository;
+import hr.fer.ruazosa.trackmyroute.repository.UserRepository;
+import hr.fer.ruazosa.trackmyroute.service.IRouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

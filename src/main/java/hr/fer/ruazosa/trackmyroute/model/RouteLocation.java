@@ -1,7 +1,8 @@
-package hr.fer.ruazosa.trackmyroute;
+package hr.fer.ruazosa.trackmyroute.model;
+
+import hr.fer.ruazosa.trackmyroute.model.Route;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 

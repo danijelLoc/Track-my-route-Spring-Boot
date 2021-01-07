@@ -1,4 +1,6 @@
-package hr.fer.ruazosa.trackmyroute;
+package hr.fer.ruazosa.trackmyroute.model;
+
+import hr.fer.ruazosa.trackmyroute.model.User;
 
 import java.util.Date;
 

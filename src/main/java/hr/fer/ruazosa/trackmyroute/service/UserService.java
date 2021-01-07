@@ -1,5 +1,9 @@
-package hr.fer.ruazosa.trackmyroute;
+package hr.fer.ruazosa.trackmyroute.service;
 
+import hr.fer.ruazosa.trackmyroute.model.User;
+import hr.fer.ruazosa.trackmyroute.model.UserBasic;
+import hr.fer.ruazosa.trackmyroute.repository.UserRepository;
+import hr.fer.ruazosa.trackmyroute.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

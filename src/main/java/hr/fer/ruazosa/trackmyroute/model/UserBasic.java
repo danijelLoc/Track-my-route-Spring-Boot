@@ -1,4 +1,4 @@
-package hr.fer.ruazosa.trackmyroute;
+package hr.fer.ruazosa.trackmyroute.model;
 
 import javax.validation.constraints.NotBlank;
 

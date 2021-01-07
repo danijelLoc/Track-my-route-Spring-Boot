@@ -1,5 +1,8 @@
-package hr.fer.ruazosa.trackmyroute;
+package hr.fer.ruazosa.trackmyroute.controller;
 
+import hr.fer.ruazosa.trackmyroute.model.Route;
+import hr.fer.ruazosa.trackmyroute.service.RouteService;
+import hr.fer.ruazosa.trackmyroute.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

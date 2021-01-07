@@ -1,5 +1,8 @@
-package hr.fer.ruazosa.trackmyroute;
+package hr.fer.ruazosa.trackmyroute.controller;
 
+import hr.fer.ruazosa.trackmyroute.service.IUserService;
+import hr.fer.ruazosa.trackmyroute.model.User;
+import hr.fer.ruazosa.trackmyroute.model.UserBasic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +15,6 @@ import javax.validation.ValidatorFactory;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.List;
 
 @RestController
 public class UserController {
