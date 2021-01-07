@@ -26,11 +26,7 @@ public class RouteController {
     // shape /routes?user_id=1
     @GetMapping("/routes")
     public ResponseEntity<Object> getRouteList(@RequestParam Long user_id) {
-        return getRoutesFunction(routeService.getRouteList(user_id));
-    }
-
-    public ResponseEntity<Object> getRoutesFunction(List<Route> routes) {
-        // validation
+        List<Route> routes = routeService.getRouteList(user_id);
         Map<String, Object> body = new LinkedHashMap<>();
         if (routes == null) {
             body.put("error", "no routes found");
@@ -39,7 +35,6 @@ public class RouteController {
             body.put("Routes", routes);
             return new ResponseEntity<Object>(body, HttpStatus.OK);
         }
-
     }
 
 
