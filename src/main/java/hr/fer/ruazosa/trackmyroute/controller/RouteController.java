@@ -1,6 +1,7 @@
 package hr.fer.ruazosa.trackmyroute.controller;
 
 import hr.fer.ruazosa.trackmyroute.model.Route;
+import hr.fer.ruazosa.trackmyroute.model.UserBasic;
 import hr.fer.ruazosa.trackmyroute.service.RouteService;
 import hr.fer.ruazosa.trackmyroute.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,21 @@ public class RouteController {
 
     // shape /routes?user_id=1
     @GetMapping("/routes")
-    @ResponseBody
-    public List<Route> getRouteList(@RequestParam Long user_id) {
-        return routeService.getRouteList(user_id);
+    public ResponseEntity<Object> getRouteList(@RequestParam Long user_id) {
+        return getRoutesFunction(routeService.getRouteList(user_id));
+    }
+
+    public ResponseEntity<Object> getRoutesFunction(List<Route> routes) {
+        // validation
+        Map<String, Object> body = new LinkedHashMap<>();
+        if (routes == null) {
+            body.put("error", "no routes found");
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
+        } else {
+            body.put("Routes", routes);
+            return new ResponseEntity<Object>(body, HttpStatus.OK);
+        }
+
     }
 
 
@@ -48,7 +61,7 @@ public class RouteController {
         User user = routeService.loginUser(route.getUser());
         body.put("user", user);
 
-        if(user == null) {
+        if (user == null) {
             body.put("error", "Invalid username or password");
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
         }
@@ -84,7 +97,7 @@ public class RouteController {
         User user = routeService.loginUser(route.getUser());
         body.put("user", user);
 
-        if(user == null) {
+        if (user == null) {
             body.put("error", "Invalid username or password");
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
         }
