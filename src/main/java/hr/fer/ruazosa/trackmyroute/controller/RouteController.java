@@ -32,7 +32,7 @@ public class RouteController {
             body.put("error", "no routes found");
             return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
         } else {
-            body.put("Routes", routes);
+            body.put("routes", routes);
             return new ResponseEntity<Object>(body, HttpStatus.OK);
         }
     }
@@ -68,6 +68,7 @@ public class RouteController {
     @PostMapping("/deleteRoute")
     public ResponseEntity<Object> deleteRoute(@RequestBody Route route) {
         // validation
+        // SIDE NOTE and time saver... in postman id of the route is required, difference from save method
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
         Set<ConstraintViolation<Route>> violations = validator.validate(route);
@@ -79,16 +80,9 @@ public class RouteController {
         if (!body.isEmpty()) {
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
         }
-        List<Route> routeList = routeService.getRouteList(route.getUser().getId());
-        if (routeList == null) {
-            body.put("error", "Route doesn't exist, list empty");
-            return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
-        }
-        if (!(routeList.contains(route))) {
-            body.put("error", "Route doesn't exist");
-            return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
-        }
 
+        // route json contains basicUser without id, when converting to User it is given new id
+        // true user
         User user = routeService.loginUser(route.getUser());
         body.put("user", user);
 
@@ -96,7 +90,22 @@ public class RouteController {
             body.put("error", "Invalid username or password");
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
         }
+
         route.setUser(user);
+
+        List<Route> routeList = routeService.getRouteList(user.getId());
+        if (routeList == null) {
+            body.put("error", "Route doesn't exist, list empty");
+            System.out.println("Route doesn't exist, list empty");
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
+        }
+        if (!(routeList.contains(route))) {
+            body.put("error", "Route doesn't exist");
+            System.out.println("error, Route doesn't exist"+String.valueOf(route.getId()));
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
+        }
+
+
         routeService.deleteRoute(route);
         return new ResponseEntity<Object>(route, HttpStatus.OK);
     }

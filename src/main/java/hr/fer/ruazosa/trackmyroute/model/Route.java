@@ -1,5 +1,6 @@
 package hr.fer.ruazosa.trackmyroute.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import hr.fer.ruazosa.trackmyroute.model.User;
 
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import java.util.*;
 
 
 @Entity
-@Table(name="routes")
+@Table(name = "routes")
 public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,14 +18,16 @@ public class Route {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @NotBlank(message = "Name cannot be emtpy")
     @Column(name = "name")
     private String name;
+    // example "2021-01-08T00:00:00"
     @NotNull(message = "Date cannot be emtpy")
     @Column(name = "date")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date;
     @Column(name = "duration")
     private Long duration;
@@ -42,9 +45,13 @@ public class Route {
         this.id = id;
     }
 
-    public User getUser() { return user;}
+    public User getUser() {
+        return user;
+    }
 
-    public void setUser(User user) { this.user = user;}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public String getName() {
         return name;
@@ -84,5 +91,19 @@ public class Route {
 
     public void setDistance(double distance) {
         this.distance = distance;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Route)) return false;
+        Route route = (Route) o;
+        return id.equals(route.id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }
