@@ -8,5 +8,5 @@ import java.util.List;
 public interface IRouteLocationService {
 
     List<RouteLocation> getRouteLocationList(Long route_id);
-    List<RouteLocation> saveRouteLocations(List<RouteLocation> routeLocations);
+    boolean saveRouteLocations(List<RouteLocation> routeLocations);
 }

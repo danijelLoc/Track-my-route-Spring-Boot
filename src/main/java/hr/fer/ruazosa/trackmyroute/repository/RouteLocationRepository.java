@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface RouteLocationRepository extends JpaRepository<List<RouteLocation>, Integer> {
+public interface RouteLocationRepository extends JpaRepository<RouteLocation, Integer> {
 
 
     @Query("SELECT rl FROM RouteLocation rl where rl.route.id = ?1")

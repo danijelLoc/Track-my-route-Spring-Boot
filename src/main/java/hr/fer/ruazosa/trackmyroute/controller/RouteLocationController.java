@@ -54,7 +54,14 @@ public class RouteLocationController {
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
         }
 
-        routeLocationService.saveRouteLocations(routeLocations);
-        return new ResponseEntity<Object>(routeLocations, HttpStatus.OK);
+        boolean flag = routeLocationService.saveRouteLocations(routeLocations);
+        if (flag == true) {
+            return new ResponseEntity<Object>(routeLocations, HttpStatus.OK);
+        }
+        else {
+            body.put("error", "list is empty");
+            return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
+        }
+
     }
 }
