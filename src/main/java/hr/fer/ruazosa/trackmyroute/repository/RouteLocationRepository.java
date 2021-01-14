@@ -7,10 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
-public interface RouteRepository extends JpaRepository<Route, Integer> {
+public interface RouteLocationRepository extends JpaRepository<List<RouteLocation>, Integer> {
 
 
-    @Query("SELECT r FROM Route r where r.user.id = ?1")
-    List<Route> findAllByUserId(Long user_id);
-
+    @Query("SELECT rl FROM RouteLocation rl where rl.route.id = ?1")
+    List<RouteLocation> findAllByRouteId(Long route_id);
 }
