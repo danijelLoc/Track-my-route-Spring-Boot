@@ -40,7 +40,7 @@ public class RouteLocationController {
     }
 
     @PostMapping("/saveRouteLocations")
-    public ResponseEntity<Object> saveRouteLocations (@RequestBody List<RouteLocation> routeLocations) {
+    public ResponseEntity<Object> saveRouteLocations (@RequestBody List<RouteLocation> routeLocations, @RequestBody Route route) {
         // validation
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -54,7 +54,7 @@ public class RouteLocationController {
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
         }
 
-        boolean flag = routeLocationService.saveRouteLocations(routeLocations);
+        boolean flag = routeLocationService.saveRouteLocations(routeLocations, route);
         if (flag == true) {
             return new ResponseEntity<Object>(routeLocations, HttpStatus.OK);
         }

@@ -5,6 +5,7 @@ import hr.fer.ruazosa.trackmyroute.model.Route;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="route_locations")
@@ -28,9 +29,6 @@ public class RouteLocation
     @NotNull(message = "longitude cannot be null")
     private Double longitude;
 
-    @Column(name = "moment")
-    @NotNull(message = "moment cannot be null")
-    private Date moment;
 
     public Long getId() {
         return id;
@@ -62,8 +60,5 @@ public class RouteLocation
         this.longitude = longitude;
     }
 
-    public Date getMoment() { return moment; }
-
-    public void setMoment(Date moment) { this.moment = moment; }
 
 }

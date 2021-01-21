@@ -1,5 +1,6 @@
 package hr.fer.ruazosa.trackmyroute.service;
 
+import hr.fer.ruazosa.trackmyroute.model.Route;
 import hr.fer.ruazosa.trackmyroute.model.RouteLocation;
 import hr.fer.ruazosa.trackmyroute.repository.RouteLocationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,10 @@ public class RouteLocationService implements IRouteLocationService {
     }
 
     @Override
-    public boolean saveRouteLocations(List<RouteLocation> routeLocations) {
+    public boolean saveRouteLocations(List<RouteLocation> routeLocations, Route route) {
         if (routeLocations!=null) {
             for (RouteLocation rl: routeLocations) {
+                rl.setRoute(route);
                 routeLocationRepository.save(rl);
             }
             return true;
