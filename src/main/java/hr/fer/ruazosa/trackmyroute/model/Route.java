@@ -30,7 +30,7 @@ public class Route {
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date date;
     @Column(name = "duration")
-    private Double duration;
+    private double duration;
     @Column(name = "speed")
     private double speed;
     @Column(name = "distance")
@@ -69,11 +69,11 @@ public class Route {
         this.date = date;
     }
 
-    public Double getDuration() {
+    public double getDuration() {
         return duration;
     }
 
-    public void setDuration(Double duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 

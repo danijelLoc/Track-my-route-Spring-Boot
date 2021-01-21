@@ -61,8 +61,8 @@ public class RouteController {
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
         }
         route.setUser(user);
-        routeService.saveRoute(route);
-        return new ResponseEntity<Object>(route, HttpStatus.OK);
+        Route properRoute = routeService.saveRoute(route);
+        return new ResponseEntity<Object>(properRoute, HttpStatus.OK);
     }
 
     @PostMapping("/deleteRoute")
@@ -101,7 +101,7 @@ public class RouteController {
         }
         if (!(routeList.contains(route))) {
             body.put("error", "Route doesn't exist");
-            System.out.println("error, Route doesn't exist"+String.valueOf(route.getId()));
+            System.out.println("error, Route doesn't exist" + String.valueOf(route.getId()));
             return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
         }
 
