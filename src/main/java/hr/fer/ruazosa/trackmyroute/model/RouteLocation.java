@@ -1,5 +1,6 @@
 package hr.fer.ruazosa.trackmyroute.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import hr.fer.ruazosa.trackmyroute.model.Route;
 
 import javax.persistence.*;
@@ -8,17 +9,16 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="route_locations")
+@Table(name = "route_locations")
 
-public class RouteLocation
-{
+public class RouteLocation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "route_location_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="route_id")
+    @JoinColumn(name = "route_id")
     private Route route;
 
     @Column(name = "latitude")
@@ -29,6 +29,20 @@ public class RouteLocation
     @NotNull(message = "longitude cannot be null")
     private Double longitude;
 
+    // example "2021-01-08T00:00:00"
+    @NotNull(message = "Date cannot be emtpy")
+    @Column(name = "moment")
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private Date moment;
+
+
+    public Date getMoment() {
+        return moment;
+    }
+
+    public void setMoment(Date moment) {
+        this.moment = moment;
+    }
 
     public Long getId() {
         return id;
@@ -38,7 +52,9 @@ public class RouteLocation
         this.id = id;
     }
 
-    public Route getRoute() { return route; }
+    public Route getRoute() {
+        return route;
+    }
 
     public void setRoute(Route route) {
         this.route = route;

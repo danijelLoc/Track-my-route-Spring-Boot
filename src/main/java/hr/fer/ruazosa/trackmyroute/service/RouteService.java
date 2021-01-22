@@ -24,8 +24,7 @@ public class RouteService implements IRouteService {
     private RouteLocationRepository routeLocationRepository;
 
     @Override
-    public User loginUser(User user)
-    {
+    public User loginUser(User user) {
         List<User> loggedUserList = userRepository.findByUserNameAndPassword(user.getUsername(), user.getPassword());
         if (loggedUserList.isEmpty()) {
             return null;
@@ -53,10 +52,15 @@ public class RouteService implements IRouteService {
     public Route deleteRoute(Route route) {
         routeRepository.delete(route);
         List<RouteLocation> routeLocations = routeLocationRepository.findAllByRouteId(route.getId());
-        for (RouteLocation rl: routeLocations) {
+        for (RouteLocation rl : routeLocations) {
             routeLocationRepository.delete(rl);
         }
         return route;
+    }
+
+    @Override
+    public List<Route> getById(Long route_id) {
+        return routeRepository.findAllByRouteId(route_id);
     }
 
 

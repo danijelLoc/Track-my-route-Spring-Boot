@@ -13,4 +13,7 @@ public interface RouteRepository extends JpaRepository<Route, Integer> {
     @Query("SELECT r FROM Route r where r.user.id = ?1")
     List<Route> findAllByUserId(Long user_id);
 
+    @Query("SELECT r FROM Route r where r.id = ?1")
+    List<Route> findAllByRouteId(Long route_id);
+
 }

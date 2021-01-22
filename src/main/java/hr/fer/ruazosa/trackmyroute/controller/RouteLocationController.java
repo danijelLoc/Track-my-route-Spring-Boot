@@ -24,6 +24,8 @@ public class RouteLocationController {
 
     @Autowired
     private RouteLocationService routeLocationService;
+    @Autowired
+    private RouteService routeService;
 
     // shape /routeLocations?route_id=1
     @GetMapping("/routeLocations")
@@ -31,7 +33,7 @@ public class RouteLocationController {
         List<RouteLocation> routeLocations = routeLocationService.getRouteLocationList(route_id);
         Map<String, Object> body = new LinkedHashMap<>();
         if (routeLocations == null) {
-            body.put("error", "no routes found");
+            body.put("error", "no route locations found");
             return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
         } else {
             body.put("routes", routeLocations);
@@ -40,7 +42,7 @@ public class RouteLocationController {
     }
 
     @PostMapping("/saveRouteLocations")
-    public ResponseEntity<Object> saveRouteLocations (@RequestBody List<RouteLocation> routeLocations, @RequestBody Route route) {
+    public ResponseEntity<Object> saveRouteLocations(@RequestParam Long route_id, @RequestBody List<RouteLocation> routeLocations) {
         // validation
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -53,15 +55,19 @@ public class RouteLocationController {
         if (!body.isEmpty()) {
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
         }
-
-        boolean flag = routeLocationService.saveRouteLocations(routeLocations, route);
-        if (flag == true) {
-            return new ResponseEntity<Object>(routeLocations, HttpStatus.OK);
-        }
-        else {
-            body.put("error", "list is empty");
+        List<Route> routesByID = routeService.getById(route_id);
+        if (routesByID.isEmpty()) {
+            body.put("error", "route id not valid");
             return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
+        } else {
+            Route route = routesByID.get(0);
+            boolean flag = routeLocationService.saveRouteLocations(routeLocations, route);
+            if (flag == true) {
+                return new ResponseEntity<Object>(routeLocations, HttpStatus.OK);
+            } else {
+                body.put("error", "list is empty");
+                return new ResponseEntity<Object>(body, HttpStatus.NOT_ACCEPTABLE);
+            }
         }
-
     }
 }
