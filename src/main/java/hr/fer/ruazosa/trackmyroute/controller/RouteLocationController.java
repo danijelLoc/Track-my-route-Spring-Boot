@@ -36,7 +36,7 @@ public class RouteLocationController {
             body.put("error", "no route locations found");
             return new ResponseEntity<Object>(body, HttpStatus.NOT_FOUND);
         } else {
-            body.put("routes", routeLocations);
+            body.put("routeLocations", routeLocations);
             return new ResponseEntity<Object>(body, HttpStatus.OK);
         }
     }
