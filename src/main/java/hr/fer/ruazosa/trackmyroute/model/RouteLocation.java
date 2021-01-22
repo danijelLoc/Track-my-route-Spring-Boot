@@ -29,21 +29,6 @@ public class RouteLocation {
     @NotNull(message = "longitude cannot be null")
     private Double longitude;
 
-    // example "2021-01-08T00:00:00"
-    @NotNull(message = "Date cannot be emtpy")
-    @Column(name = "moment")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private Date moment;
-
-
-    public Date getMoment() {
-        return moment;
-    }
-
-    public void setMoment(Date moment) {
-        this.moment = moment;
-    }
-
     public Long getId() {
         return id;
     }
