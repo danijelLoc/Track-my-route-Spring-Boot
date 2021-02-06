@@ -18,8 +18,10 @@ public class RouteService implements IRouteService {
 
     @Autowired
     private RouteRepository routeRepository;
+
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private RouteLocationRepository routeLocationRepository;
 
@@ -61,6 +63,14 @@ public class RouteService implements IRouteService {
     @Override
     public List<Route> getById(Long route_id) {
         return routeRepository.findAllByRouteId(route_id);
+    }
+
+    @Override
+    public void deleteById(Long route_id) {
+        if (!routeRepository.findAllByRouteId(route_id).isEmpty()) {
+            routeLocationRepository.deleteAllByRouteId(route_id);
+            routeRepository.deleteById(route_id);
+        }
     }
 
 

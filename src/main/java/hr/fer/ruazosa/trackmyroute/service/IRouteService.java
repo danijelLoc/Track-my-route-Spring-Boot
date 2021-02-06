@@ -17,4 +17,6 @@ public interface IRouteService {
     Route deleteRoute(Route route);
 
     List<Route> getById(Long route_id);
+
+    void deleteById(Long route_id);
 }
